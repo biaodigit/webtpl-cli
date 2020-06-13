@@ -1,0 +1,29 @@
+{
+  "name": "webtpl-cli",
+  "version": "1.0.1",
+  "description": "web template cli",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "webtpl-cli": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/biaodigit/webtpl-cli.git"
+  },
+  "author": "biaodigit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/biaodigit/webtpl-cli/issues"
+  },
+  "homepage": "https://github.com/biaodigit/webtpl-cli#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "commander": "^5.1.0",
+    "cpy": "^8.1.0",
+    "make-dir": "^3.1.0",
+    "prompts": "^2.3.2"
+  }
+}
