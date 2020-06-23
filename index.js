@@ -1,18 +1,22 @@
 #!/usr/bin/env node
-const { program } = require('commander');
-const prompts = require('prompts')
+const path = require('path');
+const glob = require('glob');
+const fs = require('fs')
+const commander = require('commander');
+const inquirer = require("inquirer");
 const chalk = require('chalk');
 const packageJson = require('./package.json')
 
 const createApp = require('./create-app')
-const { getQuestions } = require('./helpers/config')
+const log = require('./helpers/log')
+const templateConfig = require('./config/template.json')
 
 let projectPath = ''
 
-program.name(packageJson.name)
+const program = new commander.Command(packageJson.name)
     .version(packageJson.version)
-    .arguments('[project-name]')
-    .usage(`${chalk.green('[project-name]')}`)
+    .arguments('<project-name>')
+    .usage(`${chalk.green('<project-name>')}`)
     .action(name => {
         projectPath = name
     })
@@ -34,14 +38,58 @@ async function run() {
         projectPath = projectPath.trim()
     }
 
-    const res = await prompts(getQuestions(projectPath))
-
-    const { name, framework } = res
-    if (name === 'string') {
-        projectPath = name.trim()
+    if (checkDir(projectPath)) {
+        log.error(`项目${projectPath}已存在`)
+        process.exit(1)
     }
 
-    await createApp(projectPath, { framework })
+    let git = await selectTemplate()
+    await createApp(projectPath, { git })
 }
 
-run()
+/**
+ * 选择模版
+ */
+async function selectTemplate() {
+    let choices = Object.values(templateConfig).map(item => ({
+        value: item.value,
+        name: item.name
+    }))
+
+    let config = {
+        type: "list",
+        message: "选择模版类型",
+        name: "select",
+        choices: [new inquirer.Separator("模板类型"), ...choices]
+    }
+
+    let { select } = await inquirer.prompt(config)
+    let { git } = templateConfig[select]
+    return git
+}
+
+/**
+ * 检测路径是否合法
+ * @param {*} projectPath 
+ */
+function checkDir(projectPath) {
+    const list = glob.sync('*')
+    if (list.length) {
+        return list.filter(name => {
+            const fileName = path.resolve(process.cwd(), name);
+            const isDir = fs.statSync(fileName).isDirectory()
+            return name.indexOf(projectPath) !== -1 && isDir
+        }).length !== 0
+    }
+    return true
+}
+
+/**
+ * 检测脚手架最新版本
+ */
+async function notifyUpdate() {
+  // todo
+}
+
+
+run().then(notifyUpdate)
