@@ -5,7 +5,6 @@ const download = require('./helpers/download')
 module.exports = async function createApp(appPath, opt) {
     const { git } = opt
     const root = path.resolve(appPath)
-    const appName = path.basename(root)
 
     await makeDir(root)
 

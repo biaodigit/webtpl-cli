@@ -5,10 +5,12 @@ const fs = require('fs')
 const commander = require('commander');
 const inquirer = require("inquirer");
 const chalk = require('chalk');
+const checkForUpdate = require('update-check')
 const packageJson = require('./package.json')
 
 const createApp = require('./create-app')
 const log = require('./helpers/log')
+const { shouldUseYarn } = require('./helpers/utils')
 const templateConfig = require('./config/template.json')
 
 let projectPath = ''
@@ -88,7 +90,27 @@ function checkDir(projectPath) {
  * 检测脚手架最新版本
  */
 async function notifyUpdate() {
-  // todo
+    try {
+        const res = await checkForUpdate(packageJson).catch(() => null)
+        if (res && res.latest) {
+            const isYarn = shouldUseYarn()
+            console.log()
+            console.log(
+                chalk.yellow.bold('A new version of `webtpl-cli` is available!')
+            )
+            console.log(
+                'You can update by running: ' +
+                chalk.cyan(
+                    isYarn
+                        ? 'yarn global add webtpl-cli'
+                        : 'npm i -g webtpl-cli'
+                )
+            )
+            console.log()
+        }
+    } catch {
+       // ignore error
+    }
 }
 
 
