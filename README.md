@@ -1,12 +1,16 @@
 # webtpl-cli
 web模版脚手架
 
-# Installation
+# 如何使用
 ```
 npm i webtpl-cli -g
 ```
 
-# How to use
 ```
 webtpl-cli [project-name]
 ```
+
+# 个性化模版
+
+- [x] typescript
+- [x] css预处理器
