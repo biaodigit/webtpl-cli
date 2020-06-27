@@ -1,6 +1,26 @@
+const path = require('path')
+const fs = require('fs')
 const { execSync } = require('child_process')
 
+const cssSuffixMap = new Map([
+    ['sass', 'scss'],
+    ['less', 'less'],
+    ['stylus', 'styl']
+])
+
 module.exports = {
+    formatPrompt: (answer) => {
+        const { css_pre, use_csspre, typescript } = answer
+        const react_suffix = typescript ? 'tsx' : 'js'
+        const js_suffix = typescript ? 'ts' : 'js'
+        return {
+            ...answer,
+            react_suffix,
+            js_suffix,
+            css_suffix: use_csspre ? cssSuffixMap.get(css_pre) : 'css',
+            [css_pre || 'css']: true
+        }
+    },
     shouldUseYarn: () => {
         try {
             execSync('yarnpkg --version', { stdio: 'ignore' })

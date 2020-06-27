@@ -45,8 +45,8 @@ async function run() {
         process.exit(1)
     }
 
-    let git = await selectTemplate()
-    await createApp(projectPath, { git })
+    let opt = await selectTemplate()
+    await createApp(projectPath, { ...opt})
 }
 
 /**
@@ -58,16 +58,16 @@ async function selectTemplate() {
         name: item.name
     }))
 
-    let config = {
+    let promptConfig = {
         type: "list",
         message: "选择模版类型",
         name: "select",
         choices: [new inquirer.Separator("模板类型"), ...choices]
     }
 
-    let { select } = await inquirer.prompt(config)
+    let { select } = await inquirer.prompt(promptConfig)
     let { git } = templateConfig[select]
-    return git
+    return { git, select }
 }
 
 /**
@@ -109,9 +109,12 @@ async function notifyUpdate() {
             console.log()
         }
     } catch {
-       // ignore error
+        // ignore error
     }
 }
 
 
 run().then(notifyUpdate)
+    .catch(async reason => {
+
+    })

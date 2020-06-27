@@ -2,36 +2,6 @@
     "template-react": {
         "name": "react模版",
         "value": "template-react",
-        "git":""
-    },
-    "template-react-typescript": {
-        "name": "react+typescript模版",
-        "value": "template-react-typescript",
-        "git": "https://github.com/cli-templates/template-react-typescript.git"
-    },
-    "template-react-ssr":{
-        "name":"react ssr模版(基于next.js+egg.js)",
-        "value":"template-react-ssr",
-        "git":""
-    },
-    "template-vue":{
-        "name": "vue模版",
-        "value": "template-vue",
-        "git": ""
-    },
-    "template-vue-typescript": {
-        "name": "vue+typescript模版",
-        "value": "template-vue-typescript",
-        "git": ""
-    },
-    "template-rollup":{
-        "name":"rollup构建模版",
-        "value":"template-rollup",
-        "git":""
-    },
-    "template-es": {
-        "name":"测试模版",
-        "value":"template-es",
-        "git":""
+        "git":"https://github.com/cli-templates/template-react.git"
     }
 }

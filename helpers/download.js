@@ -5,6 +5,7 @@ const logSymbols = require("log-symbols");
 const chalk = require("chalk");
 
 module.exports = (root, url) => {
+    root = path.join(root,'./.download-tpl')
     const spinner = ora(`正在下载项目模板，源地址：${url}`)
     spinner.start()
     return new Promise((resolve, reject) => {
@@ -16,7 +17,7 @@ module.exports = (root, url) => {
             } else {
                 spinner.succeed()
                 console.log(logSymbols.success, chalk.green("模板下载完毕:)"));
-                resolve(path)
+                resolve(root)
             }
         })
     })
