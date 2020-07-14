@@ -13,7 +13,7 @@ module.exports = async function createApp(projectName, opt) {
 
     await makeDir(root)
 
-    let tplPath = await download(root, git)
+    // let tplPath = await download(root, git)
 
     let promptConfig = getPrompts(projectName, select)
 
@@ -21,7 +21,7 @@ module.exports = async function createApp(projectName, opt) {
 
     let genParam = {
         metadata: { ...formatPrompt(answer) },
-        src: tplPath,
+        src: '/Users/di/Projects/cli-templates/template-react',
         dest: root
     }
 

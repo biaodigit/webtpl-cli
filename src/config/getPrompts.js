@@ -17,12 +17,22 @@ const basePrompt = (name) => ([
 const reactPrompt = [
     {
         type: "confirm",
-        message: "是否使用typescript",
+        message: "使用typescript?",
         name: "typescript"
     },
     {
         type: "confirm",
-        message: "是否使用预处理器",
+        message: "使用redux?",
+        name: "redux"
+    },
+    {
+        type: "confirm",
+        message: "使用react-router?",
+        name: "react_router"
+    },
+    {
+        type: "confirm",
+        message: "使用预处理器?",
         name: "use_csspre",
     },
     {

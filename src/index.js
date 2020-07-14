@@ -2,11 +2,11 @@
 const path = require('path');
 const glob = require('glob');
 const fs = require('fs')
-const commander = require('commander');
+const program = require('commander');
 const inquirer = require("inquirer");
 const chalk = require('chalk');
 const checkForUpdate = require('update-check')
-const packageJson = require('./package.json')
+const packageJson = require('../package.json')
 
 const createApp = require('./create-app')
 const log = require('./helpers/log')
@@ -15,9 +15,7 @@ const templateConfig = require('./config/template.json')
 
 let projectPath = ''
 
-const program = new commander.Command(packageJson.name)
-    .version(packageJson.version)
-    .arguments('<project-name>')
+program.arguments('<project-name>')
     .usage(`${chalk.green('<project-name>')}`)
     .action(name => {
         projectPath = name
