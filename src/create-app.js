@@ -21,7 +21,7 @@ module.exports = async function createApp(projectName, opt) {
     const answer = await inquirer.prompt(promptConfig)
 
     let genParam = {
-        metadata: { ...formatPrompt(answer) },
+        metadata: { ...formatPrompt[type](answer) },
         src: tplPath,
         dest: root
     }
