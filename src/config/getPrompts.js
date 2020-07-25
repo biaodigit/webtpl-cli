@@ -50,7 +50,13 @@ const reactPrompt = [
 
 const vuePrompt = []
 
-const rollupPrompt = []
+const rollupPrompt = [
+    {
+        type: "confirm",
+        message: "使用typescript?",
+        name: "typescript"
+    }
+]
 
 const promptMap = new Map([
     ['react', reactPrompt],

@@ -15,9 +15,10 @@ module.exports = async function createApp(projectName, opt) {
 
     let tplPath = await download(root, git)
 
-    let promptConfig = getPrompts(projectName, select)
+    const promptConfig = getPrompts(projectName, select)
 
-    let answer = await inquirer.prompt(promptConfig)
+    const type = select.replace(/template-/, '')
+    const answer = await inquirer.prompt(promptConfig)
 
     let genParam = {
         metadata: { ...formatPrompt(answer) },

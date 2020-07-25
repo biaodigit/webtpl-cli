@@ -3,5 +3,10 @@
         "name": "react模版",
         "value": "template-react",
         "git":"https://github.com/cli-templates/template-react.git"
+    },
+    "template-rollup": {
+        "name": "rollup模版",
+        "value": "template-rollup",
+        "git": "https://github.com/cli-templates/template-rollup.git"
     }
 }
