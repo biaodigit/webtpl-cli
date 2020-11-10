@@ -4,7 +4,9 @@
   "description": "web template cli",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "major": "npm version major -m \"Upgrade to %s\"",
+    "minor": "npm version minor -m \"Upgrade to %s\"",
+    "patch": "npm version patch -m \"Upgrade to %s\""
   },
   "bin": {
     "webtpl-cli": "src/index.js"
